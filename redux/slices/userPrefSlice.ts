@@ -25,6 +25,9 @@ const userPrefSlice = createSlice({
         setFavoriteCrypto: (state, action: PayloadAction<string>) => {
             state.favoriteCrypto = action.payload;
         },
+        removeFavoriteCrypto: (state) => {
+            state.favoriteCrypto = null;
+        }
     },
 });
 
@@ -32,6 +35,7 @@ export const {
     addFavoriteCity,
     removeFavoriteCity,
     setFavoriteCrypto,
+    removeFavoriteCrypto
 } = userPrefSlice.actions;
 
 export default userPrefSlice.reducer;
