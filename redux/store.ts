@@ -6,7 +6,7 @@ import newsReducer from './slices/newsSlice';
 import uiReducer from './slices/uiSlice';
 import userPrefReducer from './slices/userPrefSlice'
 
-export const store = configureStore({
+export const makeStore = () => configureStore({
     reducer: {
         weather: weatherReducer,
         crypto: cryptoReducer,
@@ -19,5 +19,5 @@ export const store = configureStore({
     }),
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<ReturnType<typeof makeStore>['getState']>;
+export type AppDispatch = ReturnType<typeof makeStore>['dispatch'];

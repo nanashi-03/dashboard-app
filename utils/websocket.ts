@@ -1,4 +1,4 @@
-import { store } from '@/redux/store';
+import { store } from '@/redux/store.client';
 import { addNotification } from '@/redux/slices/uiSlice';
 import { fetchWeather } from './api';
 

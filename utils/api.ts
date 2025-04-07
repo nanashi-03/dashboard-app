@@ -1,6 +1,3 @@
-import { store } from '@/redux/store';
-import { addNotification } from '@/redux/slices/uiSlice';
-
 const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API || " ";
 const NEWS_API_KEY = process.env.NEXT_PUBLIC_NEWS_API || " ";
 const PUBLIC_CRYPTO_API = process.env.NEXT_PUBLIC_CRYPTO_API || " "; 
@@ -18,28 +15,6 @@ export const fetchWeather = async (city: string) => {
             throw new Error(`HTTP error! Status: ${res.status}`);
         }
         const data = await res.json();
-
-        const mainCondition = data.weather?.[0]?.main?.toLowerCase();
-        const windSpeed = data.wind?.speed;
-
-        const isStorm = ['thunderstorm', 'snow', 'rain', 'drizzle'].includes(mainCondition);
-        const isWindy = windSpeed > 10; // Windy threshold
-
-        if (isStorm || isWindy) {
-            const alertMsg = isStorm
-                ? `⚠️ Weather Alert: ${city} is experiencing ${mainCondition}!`
-                : `🌬️ Weather Alert: Strong winds in ${city} (${windSpeed} m/s)`;
-
-            store.dispatch(
-                addNotification({
-                    id: `weather_${Date.now()}`,
-                    type: 'weather_alert',
-                    message: alertMsg,
-                    timestamp: Date.now(),
-                })
-            );
-        }
-
 
         return data;
     } catch (err) {

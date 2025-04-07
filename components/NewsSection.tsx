@@ -1,4 +1,6 @@
-import { NewsCard } from './cards/NewsCard';
+'use client'; // Add this just for debugging
+
+import { NewsCard } from '@/components/cards/NewsCard';
 
 export default function NewsSection() {
     return (
@@ -8,3 +10,4 @@ export default function NewsSection() {
         </section>
     );
 }
+

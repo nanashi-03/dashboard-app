@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchWeather } from '@/utils/api';
+import { addNotification } from './uiSlice';
 
 interface WeatherState {
     data: Record<string, any>;
@@ -15,11 +16,32 @@ const initialState: WeatherState = {
 
 export const getWeather = createAsyncThunk(
     'weather/getWeather',
-    async (city: string) => {
+    async (city: string, { dispatch }) => {
         const response = await fetchWeather(city);
+
+        const mainCondition = response.weather?.[0]?.main?.toLowerCase();
+        const windSpeed = response.wind?.speed;
+
+        const isStorm = ['thunderstorm', 'snow', 'rain', 'drizzle'].includes(mainCondition);
+        const isWindy = windSpeed > 10;
+
+        if (isStorm || isWindy) {
+            const alertMsg = isStorm
+                ? `⚠️ Weather Alert: ${city} is experiencing ${mainCondition}!`
+                : `🌬️ Weather Alert: Strong winds in ${city} (${windSpeed} m/s)`;
+
+            dispatch(addNotification({
+                id: `weather_${Date.now()}`,
+                type: 'weather_alert',
+                message: alertMsg,
+                timestamp: Date.now(),
+            }));
+        }
+
         return { city, data: response };
     }
 );
+
 
 const weatherSlice = createSlice({
     name: 'weather',

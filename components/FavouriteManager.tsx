@@ -7,7 +7,7 @@ import {
     removeFavoriteCrypto,
 } from '@/redux/slices/userPrefSlice';
 import { useState } from 'react';
-import { Card } from '@/components/cards/Card';
+import { Card, MotionlessCard } from '@/components/cards/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import toast from 'react-hot-toast';
@@ -40,8 +40,8 @@ export const FavoritesManager = () => {
     const items = activeTab === 'cities' ? favoriteCities : favoriteCrypto ? [favoriteCrypto] : [];
 
     return (
-        <Card className="w-full max-w-2xl mx-auto">
-            <div className="flex gap-4 mb-4">
+        <MotionlessCard className="w-full max-w-2xl mx-auto contents">
+            <div className="flex justify-center items-center gap-4 mb-4">
                 <button
                     onClick={() => setActiveTab('cities')}
                     className={`px-4 py-2 hover:cursor-pointer rounded-full font-semibold ${activeTab === 'cities'
@@ -76,7 +76,7 @@ export const FavoritesManager = () => {
                 <button
                     onClick={handleAdd}
                     disabled={isCryptoDisabled || cityLimitReached || !input}
-                    className="bg-green-500 hover:bg-green-600  hover:cursor-pointer text-white px-4 py-2 rounded-lg"
+                    className="bg-green-500 hover:bg-green-600 hover:cursor-pointer text-white px-4 py-2 rounded-lg"
                 >
                     Add
                 </button>
@@ -86,7 +86,7 @@ export const FavoritesManager = () => {
                 {items.map((item) => (
                     <li
                         key={item}
-                        className="flex gap-1 justify-between items-center bg-gray-100 dark:bg-gray-800 p-2 rounded-lg"
+                        className="flex gap-1 justify-evenly items-center bg-gray-100 dark:bg-gray-800 p-2 rounded-lg"
                     >
                         <span className="capitalize">{item}</span>
                         <button
@@ -95,13 +95,13 @@ export const FavoritesManager = () => {
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 hover:cursor-pointer" aria-hidden="true" focusable="false" viewBox="0 0 384 512">
                                 {/*--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
-                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                <path fill='#fb2c36' d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                             </svg>
                         </button>
                     </li>
                 ))}
                 {items.length === 0 && <p className="text-gray-500">No favorites yet.</p>}
             </ul>
-        </Card>
+        </MotionlessCard>
     );
 };

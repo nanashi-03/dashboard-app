@@ -13,10 +13,13 @@ const initialState: NewsState = {
     error: null,
 };
 
-export const getNews = createAsyncThunk('news/getNews', async () => {
-    const response = await fetchCryptoNews();
-    return response.articles || [];
-});
+export const getNews = createAsyncThunk(
+    'news/getNews',
+    async () => {
+        const response = await fetchCryptoNews();
+        return response.results;
+    }
+);
 
 const newsSlice = createSlice({
     name: 'news',
