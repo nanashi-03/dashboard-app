@@ -29,7 +29,7 @@ export const CryptoCard = ({ cryptoId }: { cryptoId: string }) => {
     if (error && !cryptoData) return <Card className='dark:bg-gray-900'>Error: {error}</Card>;
     if (!cryptoData) return null;
 
-    const { name, current_price, price_change_percentage_24h, market_cap } = cryptoData;
+    const { name, current_price, price_change_percentage_24h, market_cap, id } = cryptoData;
     
     // console.log(market_data);
     // const price = market_data?.current_price?.usd;
@@ -37,12 +37,12 @@ export const CryptoCard = ({ cryptoId }: { cryptoId: string }) => {
     // const marketCap = market_data?.market_cap?.usd;
 
     return (
-        <Link href={`/crypto/${name}`}>
+        <Link href={`/crypto/${id}`}>
             <Card className='dark:bg-gray-900'>
                 <h2 className="text-xl font-semibold capitalize">{name}</h2>
-                <p>💰 Price: ${current_price?.toFixed(2)}</p>
+                <p>💰 Price: ₹{current_price?.toFixed(2)}</p>
                 <p>📉 24h Change: {price_change_percentage_24h?.toFixed(2)}%</p>
-                <p>🏦 Market Cap: ${market_cap?.toLocaleString()}</p>
+                <p>🏦 Market Cap: ₹{market_cap?.toLocaleString()}</p>
             </Card>
         </Link>
         

@@ -47,7 +47,7 @@ export const fetchCrypto = async (id: string) => {
 // Crypto: Get historical data for the details page
 export const fetchCryptoHistory = async (id: string, days = 7) => {
     let currency = "inr"
-    const url = `${COIN_GECKO_BASE}/coins/${id}/market_chart?vs_currency=${currency}&days=${days}`;
+    const url = `${COIN_GECKO_BASE}/coins/${id.toLowerCase()}/market_chart?vs_currency=${currency}&days=${days}`;
     const options = {
         method: 'GET',
         headers: { accept: 'application/json', 'x-cg-demo-api-key': PUBLIC_CRYPTO_API }
@@ -56,12 +56,25 @@ export const fetchCryptoHistory = async (id: string, days = 7) => {
     try {
         const res = await fetch(url, options);
         if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+            throw new Error(`HTTP error! Status: ${res.status} for ${url}`);
         }
         const data = await res.json();
         return data;
     } catch (err) {
         console.error("FetchCryptoMarket error:", err)
+        throw err;
+    }
+};
+//Weather: Get forecast data for the details page
+export const fetchWeatherForecast = async (lat: number, lon: number) => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        console.error("fetchWeatherForecast error:", err);
         throw err;
     }
 };

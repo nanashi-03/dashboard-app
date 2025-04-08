@@ -5,14 +5,14 @@ import storage from 'redux-persist/lib/storage';
 import weatherReducer from './slices/weatherSlice';
 import cryptoReducer from './slices/cryptoSlice';
 import newsReducer from './slices/newsSlice';
-import uiReducer from './slices/uiSlice';
+import notifReducer from './slices/notifSlice';
 import userPrefReducer from './slices/userPrefSlice'
 
 const reducers = combineReducers({
     weather: weatherReducer,
     crypto: cryptoReducer,
     news: newsReducer,
-    ui: uiReducer,
+    notif: notifReducer,
     userPref: userPrefReducer
 })
 

@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import weatherReducer from './slices/weatherSlice';
 import cryptoReducer from './slices/cryptoSlice';
 import newsReducer from './slices/newsSlice';
-import uiReducer from './slices/uiSlice';
+import notifReducer from './slices/notifSlice';
 import userPrefReducer from './slices/userPrefSlice'
 
 export const makeStore = () => configureStore({
@@ -11,7 +11,7 @@ export const makeStore = () => configureStore({
         weather: weatherReducer,
         crypto: cryptoReducer,
         news: newsReducer,
-        ui: uiReducer,
+        notif: notifReducer,
         userPref: userPrefReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

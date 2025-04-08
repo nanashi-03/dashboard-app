@@ -11,7 +11,6 @@ export const NewsCard = () => {
     const { articles, loading, error } = useSelector((state: RootState) => state.news);
 
     useEffect(() => {
-        console.log('Dispatching getNews...');
         dispatch(getNews());
     }, [dispatch]);
     

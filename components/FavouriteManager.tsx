@@ -82,7 +82,7 @@ export const FavoritesManager = () => {
                 </button>
             </div>
 
-            <ul className="flex place-content-evenly place-items-start space-y-2">
+            <ul className="flex place-content-evenly place-items-start">
                 {items.map((item) => (
                     <li
                         key={item}

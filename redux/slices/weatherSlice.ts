@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchWeather } from '@/utils/api';
-import { addNotification } from './uiSlice';
+import { addNotification } from './notifSlice';
 
 interface WeatherState {
     data: Record<string, any>;
