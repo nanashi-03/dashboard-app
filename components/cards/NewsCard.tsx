@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '@/redux/store';
 import { getNews } from '@/redux/slices/newsSlice';
-import { Card } from './Card';
+import { Card, MotionlessCard } from './Card';
 
 type Article = {
     link: string;
@@ -27,7 +27,7 @@ export const NewsCard = () => {
         return <Card className="dark:bg-gray-900">No news found</Card>;
 
     return (
-        <Card className="dark:bg-gray-900">
+        <MotionlessCard className="dark:bg-gray-900">
             <div className="mt-2 list-disc space-y-1 pl-4">
                 {articles.slice(0, 5).map((article: Article, index: number) => (
                     <a key={index} href={article.link} target="_blank" rel="noopener noreferrer">
@@ -38,6 +38,6 @@ export const NewsCard = () => {
                     </a>
                 ))}
             </div>
-        </Card>
+        </MotionlessCard>
     );
 };
