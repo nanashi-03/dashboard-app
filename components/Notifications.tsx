@@ -89,7 +89,7 @@ export const Notifications = () => {
     return (
         <button
             onClick={replayToasts}
-            className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+            className="flex place-items-center w-12 h-12 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
         >
             <Bell />
         </button>

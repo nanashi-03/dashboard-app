@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { WeatherDetailsCard } from '@/components/cards/WeatherDetailsCard';
 
 interface Props {
-    params: { city: string };
+    params: Promise<{ city: string }>;
 }
 
 export default async function WeatherDetailPage({ params }: Props) {

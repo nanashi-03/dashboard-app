@@ -6,7 +6,7 @@ import { getCrypto } from '@/redux/slices/cryptoSlice';
 import { RootState, AppDispatch } from '@/redux/store';
 import Image from 'next/image';
 import { fetchCryptoHistory } from '@/utils/api';
-import { CryptoPriceChart } from '../CryptoPriceChart';
+import { CryptoPriceChart } from '@/components/charts/CryptoPriceChart';
 import { Loading } from '@/components/Loading'
 
 const dayOptions = [7, 14, 30, 90, 180];

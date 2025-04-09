@@ -3,7 +3,7 @@ export const dynamic = 'force-dynamic';
 import { CryptoDetailsCard } from '@/components/cards/CryptoDetailsCard';
 
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
 
 export default async function WeatherDetailPage({ params }: Props) {

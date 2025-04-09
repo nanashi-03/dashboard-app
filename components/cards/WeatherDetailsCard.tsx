@@ -7,14 +7,7 @@ import { RootState, AppDispatch } from '@/redux/store';
 import Image from 'next/image';
 import { fetchWeatherForecast } from '@/utils/api';
 import { Loading } from '@/components/Loading';
-import {
-    LineChart, 
-    Line, 
-    XAxis, 
-    YAxis, 
-    Tooltip,
-    ResponsiveContainer,
-    CartesianGrid } from 'recharts';
+import WeatherForecastChart from '@/components/charts/WeatherForecastChart';
 
 export function WeatherDetailsCard({ city }: { city: string }) {
     const dispatch = useDispatch<AppDispatch>();
@@ -123,22 +116,7 @@ export function WeatherDetailsCard({ city }: { city: string }) {
             {chartLoading ? (
                 <Loading /> 
             ) : forecast.length > 0 ? (
-                <div>
-                    <h2 className="text-xl font-semibold mb-2">5-Day Forecast</h2>
-                    <ResponsiveContainer width="100%" height={500}>
-                        <LineChart data={forecast}>
-                            <XAxis dataKey="time" stroke="#aaa" />
-                            {/* tick={{ fontSize: 10 }} */}
-                            <YAxis stroke="#aaa" domain={['auto', 'auto']} />
-                            <Tooltip
-                                contentStyle={{ backgroundColor: '#1f2937', borderColor: '#4b5563' }}
-                                labelStyle={{ color: '#93c5fd' }}
-                                formatter={(value: number) => [`${value.toLocaleString()}°C`, 'Temperature']}
-                            />
-                            <Line type="monotone" dataKey="temp" stroke="#4ade80" strokeWidth={2} dot={false} />
-                        </LineChart>
-                    </ResponsiveContainer>
-                </div>
+                <WeatherForecastChart data={forecast} />
             ) : (
                 <p className="text-gray-500">No forecast data available.</p>
             )}

@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🛠️ Tech Stack
 
-## Getting Started
+- **Framework**: [Next.js 14 (App Router)](https://nextjs.org/)
+- **State Management**: Redux Toolkit + RTK Query
+- **Styling**: Tailwind CSS + Dark Mode
+- **Charting**: Recharts
+- **APIs**:
+  - [OpenWeatherMap](https://openweathermap.org/api)
+  - [CoinGecko](https://www.coingecko.com/en/api/documentation)
 
-First, run the development server:
+## 📦 Setup Instructions
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/crypto-weather-nexus.git
+cd crypto-weather-nexus
+```
+
+### 2. Install dependencies
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npm install clsx uuid react-hot-toast framer-motion lucide-react @reduxjs/toolkit react-redux redux-thunk recharts redux-persist
+```
+
+### 3. Create .env
+
+```bash
+touch .env
+```
+
+And add the environment variables 
+
+```
+NEXT_PUBLIC_WEATHER_API = ""
+NEXT_PUBLIC_CRYPTO_API = ""
+NEXT_PUBLIC_NEWS_API = ""
+```
+
+### 4. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 5. Lint and Format
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run format
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 Design Decisions
 
-## Learn More
+1. **State Management**: Redux Toolkit was chosen for its simplicity and integration with Redux DevTools. Persisted state is used for user preferences to maintain data across sessions.
+2. **WebSocket Integration**: A dedicated WebSocket utility handles real-time updates for cryptocurrency prices, with automatic reconnection logic for reliability. Due to the unavailability of the websocket, this is unmounted. On discovery of a new websocket of similar use, it can be remounted.
+3. **API Abstraction**: API calls are abstracted into utility functions to ensure separation of concerns and reusability.
+4. **Dynamic Routing**: Next.js dynamic routes are used for detail pages (e.g., `/weather/[city]` and `/crypto/[id]`) to provide a clean and scalable URL structure.
+5. **Notification System**: A centralized notification system is implemented using Redux and `react-hot-toast` for real-time alerts.
+6. **Charting**: Recharts was selected for its ease of use and responsive design, ensuring compatibility with various screen sizes.
 
-To learn more about Next.js, take a look at the following resources:
+## 🧗 Challenges and Resolutions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **WebSocket Reliability**: The WebSocket for cryptocurrency price updates was unreliable. To address this, a reconnection mechanism was implemented, and the WebSocket feature was temporarily unmounted until a more stable service is identified.
+2. **State Persistence**: Ensuring user preferences persist across sessions was challenging. This was resolved by integrating `redux-persist` to store preferences locally.
+3. **Dynamic API Data Handling**: Handling dynamic API responses for weather and cryptocurrency data required robust error handling and fallback mechanisms to ensure the app remains functional even when APIs fail.
+4. **Responsive Design**: Ensuring charts and UI components adapt to various screen sizes was achieved using Recharts and Tailwind CSS's responsive utilities.
+5. **Notification Overload**: To prevent overwhelming users with notifications, a limit of 10 notifications was enforced, and older notifications are automatically removed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📤 Deployment
 
-## Deploy on Vercel
+```bash 
+npm run build
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
