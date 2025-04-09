@@ -17,8 +17,8 @@ export const WeatherCard = ({ city }: { city: string }) => {
 
     const cityData = data[city];
 
-    if (loading && !cityData) return <Card className='dark:bg-gray-900'>Loading {city}...</Card>;
-    if (error && !cityData) return <Card className='dark:bg-gray-900'>Error: {error}</Card>;
+    if (loading && !cityData) return <Card className="dark:bg-gray-900">Loading {city}...</Card>;
+    if (error && !cityData) return <Card className="dark:bg-gray-900">Error: {error}</Card>;
     if (!cityData) return null;
 
     const condition = cityData.weather?.[0]?.main;
@@ -27,7 +27,7 @@ export const WeatherCard = ({ city }: { city: string }) => {
 
     return (
         <Link href={`/weather/${city}`}>
-            <Card className='dark:bg-gray-900'>
+            <Card className="dark:bg-gray-900">
                 <h2 className="text-xl font-semibold capitalize">{city}</h2>
                 <p>🌡 Temp: {temp}°C</p>
                 <p>💧 Humidity: {humidity}%</p>

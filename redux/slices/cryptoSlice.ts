@@ -13,13 +13,10 @@ const initialState: CryptoState = {
     error: null,
 };
 
-export const getCrypto = createAsyncThunk(
-    'crypto/getCrypto',
-    async (id: string) => {
-        const response = await fetchCrypto(id);
-        return { id, data: response };
-    }
-);
+export const getCrypto = createAsyncThunk('crypto/getCrypto', async (id: string) => {
+    const response = await fetchCrypto(id);
+    return { id, data: response };
+});
 
 const cryptoSlice = createSlice({
     name: 'crypto',

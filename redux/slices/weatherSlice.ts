@@ -30,18 +30,19 @@ export const getWeather = createAsyncThunk(
                 ? `⚠️ Weather Alert: ${city} is experiencing ${mainCondition}!`
                 : `🌬️ Weather Alert: Strong winds in ${city} (${windSpeed} m/s)`;
 
-            dispatch(addNotification({
-                id: `weather_${Date.now()}`,
-                type: 'weather_alert',
-                message: alertMsg,
-                timestamp: Date.now(),
-            }));
+            dispatch(
+                addNotification({
+                    id: `weather_${Date.now()}`,
+                    type: 'weather_alert',
+                    message: alertMsg,
+                    timestamp: Date.now(),
+                }),
+            );
         }
 
         return { city, data: response };
-    }
+    },
 );
-
 
 const weatherSlice = createSlice({
     name: 'weather',

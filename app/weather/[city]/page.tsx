@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default async function WeatherDetailPage({ params }: Props) {
-    const param = await params
+    const param = await params;
     const city = param.city;
     return <WeatherDetailsCard city={city} />;
 }

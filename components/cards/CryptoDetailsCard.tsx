@@ -7,7 +7,7 @@ import { RootState, AppDispatch } from '@/redux/store';
 import Image from 'next/image';
 import { fetchCryptoHistory } from '@/utils/api';
 import { CryptoPriceChart } from '@/components/charts/CryptoPriceChart';
-import { Loading } from '@/components/Loading'
+import { Loading } from '@/components/Loading';
 
 const dayOptions = [7, 14, 30, 90, 180];
 
@@ -31,7 +31,7 @@ export function CryptoDetailsCard({ id }: { id: string }) {
             try {
                 const data = await fetchCryptoHistory(id, days);
                 if (!data?.prices || !Array.isArray(data.prices)) {
-                    throw new Error("No valid price data found.");
+                    throw new Error('No valid price data found.');
                 }
 
                 const formatted = data.prices.map(([timestamp, price]: [number, number]) => ({
@@ -40,7 +40,7 @@ export function CryptoDetailsCard({ id }: { id: string }) {
                 }));
                 setChartData(formatted);
             } catch (err) {
-                console.error("Chart load error:", err);
+                console.error('Chart load error:', err);
                 setChartData([]);
             } finally {
                 setChartLoading(false);
@@ -50,9 +50,8 @@ export function CryptoDetailsCard({ id }: { id: string }) {
         loadData();
     }, [id, days]);
 
-
     if (loading) return <Loading />;
-    if (error) return <div className="p-6 text-red-500 text-center">⚠️ Error: {error}</div>;
+    if (error) return <div className="p-6 text-center text-red-500">⚠️ Error: {error}</div>;
     if (!cryptoData) return <p>No crypto data found.</p>;
 
     const crypto = cryptoData[0];
@@ -76,34 +75,47 @@ export function CryptoDetailsCard({ id }: { id: string }) {
     } = crypto;
 
     return (
-        <div className="p-6 m-6 rounded-lg bg-white dark:bg-gray-900 shadow-lg max-w-3xl mx-auto">
-            <div className="flex items-center gap-4 mb-6">
+        <div className="m-6 mx-auto max-w-3xl rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900">
+            <div className="mb-6 flex items-center gap-4">
                 <Image src={image} alt={name} width={64} height={64} />
                 <h2 className="text-2xl font-bold">{name}</h2>
-                <span className="text-gray-500 text-sm">Rank #{market_cap_rank}</span>
+                <span className="text-sm text-gray-500">Rank #{market_cap_rank}</span>
             </div>
 
             <div className="grid gap-2 text-sm">
-                <p>💰 Price: <strong>₹{current_price.toLocaleString()}</strong></p>
+                <p>
+                    💰 Price: <strong>₹{current_price.toLocaleString()}</strong>
+                </p>
                 <p>📊 Market Cap: ₹{market_cap.toLocaleString()}</p>
-                <p>🔄 24h Change: <span className={price_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'}>
-                    {price_change_percentage_24h.toFixed(2)}%
-                </span></p>
+                <p>
+                    🔄 24h Change:{' '}
+                    <span
+                        className={
+                            price_change_percentage_24h > 0 ? 'text-green-500' : 'text-red-500'
+                        }
+                    >
+                        {price_change_percentage_24h.toFixed(2)}%
+                    </span>
+                </p>
                 <p>📈 24h Volume: ₹{total_volume.toLocaleString()}</p>
-                <p>🚀 All Time High: ₹{ath.toLocaleString()} ({ath_change_percentage.toFixed(2)}%) on {new Date(ath_date).toLocaleDateString()}</p>
-                <p>📉 All Time Low: ₹{atl.toLocaleString()} ({atl_change_percentage.toFixed(2)}%) on {new Date(atl_date).toLocaleDateString()}</p>
+                <p>
+                    🚀 All Time High: ₹{ath.toLocaleString()} ({ath_change_percentage.toFixed(2)}%)
+                    on {new Date(ath_date).toLocaleDateString()}
+                </p>
+                <p>
+                    📉 All Time Low: ₹{atl.toLocaleString()} ({atl_change_percentage.toFixed(2)}%)
+                    on {new Date(atl_date).toLocaleDateString()}
+                </p>
                 <p>⏱️ Last Updated: {new Date(last_updated).toLocaleString()}</p>
             </div>
 
             <div className="p-6">
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4 gap-3">
-                    <h1 className="text-2xl font-bold text-white capitalize">
-                        {id} Price Chart
-                    </h1>
+                <div className="mb-4 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
+                    <h1 className="text-2xl font-bold text-white capitalize">{id} Price Chart</h1>
                     <select
                         value={days}
                         onChange={(e) => setDays(Number(e.target.value))}
-                        className="bg-gray-800 text-white rounded px-3 py-2"
+                        className="rounded bg-gray-800 px-3 py-2 text-white"
                     >
                         {dayOptions.map((option) => (
                             <option key={option} value={option}>

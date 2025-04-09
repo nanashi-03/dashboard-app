@@ -5,8 +5,8 @@
 - **Styling**: Tailwind CSS + Dark Mode
 - **Charting**: Recharts
 - **APIs**:
-  - [OpenWeatherMap](https://openweathermap.org/api)
-  - [CoinGecko](https://www.coingecko.com/en/api/documentation)
+    - [OpenWeatherMap](https://openweathermap.org/api)
+    - [CoinGecko](https://www.coingecko.com/en/api/documentation)
 
 ## 📦 Setup Instructions
 
@@ -29,7 +29,7 @@ npm install
 touch .env
 ```
 
-And add the environment variables 
+And add the environment variables
 
 ```
 NEXT_PUBLIC_WEATHER_API = ""
@@ -69,8 +69,7 @@ npm run format
 
 ## 📤 Deployment
 
-```bash 
+```bash
 npm run build
 npm start
 ```
-

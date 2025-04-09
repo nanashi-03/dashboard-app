@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,8 +10,8 @@ import { Loading } from '@/components/Loading';
 import WeatherForecastChart from '@/components/charts/WeatherForecastChart';
 
 type ForecastPoint = {
-    time: string;   // formatted date string
-    temp: string;   // temperature as a formatted string (e.g., "22.3")
+    time: string; // formatted date string
+    temp: string; // temperature as a formatted string (e.g., "22.3")
 };
 
 type RawForecastItem = {
@@ -39,7 +39,10 @@ export function WeatherDetailsCard({ city }: { city: string }) {
             if (weatherData?.coord) {
                 setChartLoading(true);
                 try {
-                    const data = await fetchWeatherForecast(weatherData.coord.lat, weatherData.coord.lon);
+                    const data = await fetchWeatherForecast(
+                        weatherData.coord.lat,
+                        weatherData.coord.lon,
+                    );
                     const formatted = data.list.map((item: RawForecastItem) => ({
                         time: new Date(item.dt * 1000).toLocaleString('en-IN', {
                             hour: '2-digit',
@@ -50,7 +53,7 @@ export function WeatherDetailsCard({ city }: { city: string }) {
                     }));
                     setForecast(formatted);
                 } catch (err) {
-                    console.error("Forecast fetch failed:", err);
+                    console.error('Forecast fetch failed:', err);
                 } finally {
                     setChartLoading(false);
                 }
@@ -60,7 +63,7 @@ export function WeatherDetailsCard({ city }: { city: string }) {
     }, [weatherData]);
 
     if (loading) return <Loading />;
-    if (error) return <div className="p-6 text-red-500 text-center">⚠️ Error: {error}</div>;
+    if (error) return <div className="p-6 text-center text-red-500">⚠️ Error: {error}</div>;
     if (!weatherData) return <p>No weather data found.</p>;
 
     const { main, weather, wind, sys, visibility, clouds, dt, name } = weatherData;
@@ -79,7 +82,7 @@ export function WeatherDetailsCard({ city }: { city: string }) {
     };
 
     return (
-        <div className="p-6 m-6 max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg text-gray-800 dark:text-white space-y-6">
+        <div className="m-6 mx-auto max-w-3xl space-y-6 rounded-xl bg-white p-6 text-gray-800 shadow-lg dark:bg-gray-900 dark:text-white">
             <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold">
                     {name}, {sys.country}
@@ -98,36 +101,68 @@ export function WeatherDetailsCard({ city }: { city: string }) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+            <div className="grid grid-cols-2 gap-4 text-sm md:grid-cols-3">
                 <div>
-                    <p><strong>🌡️ Temp:</strong> {main.temp}°C</p>
-                    <p><strong>Feels like:</strong> {main.feels_like}°C</p>
-                    <p><strong>Min/Max:</strong> {main.temp_min}°C / {main.temp_max}°C</p>
+                    <p>
+                        <strong>🌡️ Temp:</strong> {main.temp}°C
+                    </p>
+                    <p>
+                        <strong>Feels like:</strong> {main.feels_like}°C
+                    </p>
+                    <p>
+                        <strong>Min/Max:</strong> {main.temp_min}°C / {main.temp_max}°C
+                    </p>
                 </div>
                 <div>
-                    <p><strong>💧 Humidity:</strong> {main.humidity}%</p>
-                    <p><strong>🌫️ Visibility:</strong> {visibility / 1000} km</p>
-                    <p><strong>☁️ Cloudiness:</strong> {clouds.all}%</p>
+                    <p>
+                        <strong>💧 Humidity:</strong> {main.humidity}%
+                    </p>
+                    <p>
+                        <strong>🌫️ Visibility:</strong> {visibility / 1000} km
+                    </p>
+                    <p>
+                        <strong>☁️ Cloudiness:</strong> {clouds.all}%
+                    </p>
                 </div>
                 <div>
-                    <p><strong>💨 Wind:</strong> {wind.speed} m/s</p>
-                    <p><strong>Direction:</strong> {windDirection(wind.deg)} ({wind.deg}°)</p>
-                    {wind.gust && <p><strong>Gust:</strong> {wind.gust} m/s</p>}
+                    <p>
+                        <strong>💨 Wind:</strong> {wind.speed} m/s
+                    </p>
+                    <p>
+                        <strong>Direction:</strong> {windDirection(wind.deg)} ({wind.deg}°)
+                    </p>
+                    {wind.gust && (
+                        <p>
+                            <strong>Gust:</strong> {wind.gust} m/s
+                        </p>
+                    )}
                 </div>
                 <div>
-                    <p><strong>🕒 Last Updated:</strong> {formatTime(dt)}</p>
-                    <p><strong>🌅 Sunrise:</strong> {formatTime(sys.sunrise)}</p>
-                    <p><strong>🌇 Sunset:</strong> {formatTime(sys.sunset)}</p>
+                    <p>
+                        <strong>🕒 Last Updated:</strong> {formatTime(dt)}
+                    </p>
+                    <p>
+                        <strong>🌅 Sunrise:</strong> {formatTime(sys.sunrise)}
+                    </p>
+                    <p>
+                        <strong>🌇 Sunset:</strong> {formatTime(sys.sunset)}
+                    </p>
                 </div>
                 <div>
-                    <p><strong>📈 Pressure:</strong> {main.pressure} hPa</p>
-                    <p><strong>🌊 Sea Level:</strong> {main.sea_level ?? 'N/A'}</p>
-                    <p><strong>🏔️ Ground Level:</strong> {main.grnd_level ?? 'N/A'}</p>
+                    <p>
+                        <strong>📈 Pressure:</strong> {main.pressure} hPa
+                    </p>
+                    <p>
+                        <strong>🌊 Sea Level:</strong> {main.sea_level ?? 'N/A'}
+                    </p>
+                    <p>
+                        <strong>🏔️ Ground Level:</strong> {main.grnd_level ?? 'N/A'}
+                    </p>
                 </div>
             </div>
 
             {chartLoading ? (
-                <Loading /> 
+                <Loading />
             ) : forecast.length > 0 ? (
                 <WeatherForecastChart data={forecast} />
             ) : (

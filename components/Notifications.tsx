@@ -16,21 +16,22 @@ export const Notifications = () => {
             if (!lastSeenRef.current.has(notif.id)) {
                 toast.custom((t) => (
                     <div
-                        className={`${t.visible ? 'animate-enter' : 'animate-leave'
-                            } gap-2 max-w-sm w-full bg-gray-800 shadow-lg rounded-xl pointer-events-auto flex ring-1 ring-black ring-opacity-5 p-4`}
+                        className={`${
+                            t.visible ? 'animate-enter' : 'animate-leave'
+                        } ring-opacity-5 pointer-events-auto flex w-full max-w-sm gap-2 rounded-xl bg-gray-800 p-4 shadow-lg ring-1 ring-black`}
                     >
                         {/* Icon */}
                         <span className="mt-1">
                             {notif.type === 'price_alert' ? (
-                                <Bitcoin className="text-yellow-500 w-5 h-5" />
+                                <Bitcoin className="h-5 w-5 text-yellow-500" />
                             ) : notif.type === 'weather_alert' ? (
-                                <CloudSun className="text-blue-500 w-5 h-5" />
+                                <CloudSun className="h-5 w-5 text-blue-500" />
                             ) : (
-                                <AlertCircle className="text-gray-500 w-5 h-5" />
+                                <AlertCircle className="h-5 w-5 text-gray-500" />
                             )}
                         </span>
                         {/* Message */}
-                        <div className="flex-1 w-0">
+                        <div className="w-0 flex-1">
                             <p className="text-sm font-medium">{notif.message}</p>
                             <p className="text-xs text-gray-500">
                                 {new Date(notif.timestamp).toLocaleTimeString()}
@@ -39,7 +40,7 @@ export const Notifications = () => {
                         {/* Close Button */}
                         <button
                             onClick={() => toast.dismiss(t.id)}
-                            className="absolute top-2 right-2 text-gray-400 hover:text-white transition"
+                            className="absolute top-2 right-2 text-gray-400 transition hover:text-white"
                         >
                             ✕
                         </button>
@@ -54,21 +55,22 @@ export const Notifications = () => {
         notifications.forEach((notif) => {
             toast.custom((t) => (
                 <div
-                    className={`${t.visible ? 'animate-enter' : 'animate-leave'
-                        } gap-2 max-w-sm w-full bg-gray-800 shadow-lg rounded-xl pointer-events-auto flex ring-1 ring-black ring-opacity-5 p-4`}
+                    className={`${
+                        t.visible ? 'animate-enter' : 'animate-leave'
+                    } ring-opacity-5 pointer-events-auto flex w-full max-w-sm gap-2 rounded-xl bg-gray-800 p-4 shadow-lg ring-1 ring-black`}
                 >
                     {/* Icon */}
                     <span className="mt-1">
                         {notif.type === 'price_alert' ? (
-                            <Bitcoin className="text-yellow-500 w-5 h-5" />
+                            <Bitcoin className="h-5 w-5 text-yellow-500" />
                         ) : notif.type === 'weather_alert' ? (
-                            <CloudSun className="text-blue-500 w-5 h-5" />
+                            <CloudSun className="h-5 w-5 text-blue-500" />
                         ) : (
-                            <AlertCircle className="text-gray-500 w-5 h-5" />
+                            <AlertCircle className="h-5 w-5 text-gray-500" />
                         )}
                     </span>
                     {/* Message */}
-                    <div className="flex-1 w-0">
+                    <div className="w-0 flex-1">
                         <p className="text-sm font-medium">{notif.message}</p>
                         <p className="text-xs text-gray-500">
                             {new Date(notif.timestamp).toLocaleTimeString()}
@@ -77,7 +79,7 @@ export const Notifications = () => {
                     {/* Close Button */}
                     <button
                         onClick={() => toast.dismiss(t.id)}
-                        className="absolute top-2 right-2 text-gray-400 hover:text-white transition"
+                        className="absolute top-2 right-2 text-gray-400 transition hover:text-white"
                     >
                         ✕
                     </button>
@@ -89,7 +91,7 @@ export const Notifications = () => {
     return (
         <button
             onClick={replayToasts}
-            className="flex place-items-center w-12 h-12 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+            className="flex h-12 w-12 place-items-center rounded-xl bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
         >
             <Bell />
         </button>

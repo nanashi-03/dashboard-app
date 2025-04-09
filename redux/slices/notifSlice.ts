@@ -31,9 +31,6 @@ const notifSlice = createSlice({
     },
 });
 
-export const {
-    addNotification,
-    clearNotifications,
-} = notifSlice.actions;
+export const { addNotification, clearNotifications } = notifSlice.actions;
 
 export default notifSlice.reducer;

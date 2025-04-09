@@ -4,11 +4,11 @@ import { fetchWeather } from './api';
 
 const state = store.getState();
 const WEATHER_CITIES = state.userPref.favoriteCities;
-const third_crypto = state.userPref.favoriteCrypto||'tether';
+const third_crypto = state.userPref.favoriteCrypto || 'tether';
 
 const COINCAP_WS_URL = `wss://ws.coincap.io/prices?assets=bitcoin,ethereum,${third_crypto}`;
 
-const WEATHER_INTERVAL = 60 * 1000; 
+const WEATHER_INTERVAL = 60 * 1000;
 
 let socket: WebSocket | null = null;
 let weatherIntervalId: NodeJS.Timeout | null = null;
@@ -53,7 +53,7 @@ export const startWebSocket = () => {
                     type: 'price_alert',
                     message: `${symbol.toUpperCase()} moved to $${priceFloat.toFixed(2)} ${prevPrice ? (priceFloat > prevPrice ? '↑' : '↓') : ''}`,
                     timestamp: Date.now(),
-                })
+                }),
             );
         });
     };

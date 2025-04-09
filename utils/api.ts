@@ -1,6 +1,6 @@
-const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API || " ";
-const NEWS_API_KEY = process.env.NEXT_PUBLIC_NEWS_API || " ";
-const PUBLIC_CRYPTO_API = process.env.NEXT_PUBLIC_CRYPTO_API || " "; 
+const WEATHER_API_KEY = process.env.NEXT_PUBLIC_WEATHER_API || ' ';
+const NEWS_API_KEY = process.env.NEXT_PUBLIC_NEWS_API || ' ';
+const PUBLIC_CRYPTO_API = process.env.NEXT_PUBLIC_CRYPTO_API || ' ';
 
 const COIN_GECKO_BASE = 'https://api.coingecko.com/api/v3';
 const OPEN_WEATHER_BASE = 'https://api.openweathermap.org/data/2.5';
@@ -25,11 +25,11 @@ export const fetchWeather = async (city: string) => {
 
 // Crypto: Get market data for single crypto coin
 export const fetchCrypto = async (id: string) => {
-    let currency = "inr"
+    let currency = 'inr';
     const url = `${COIN_GECKO_BASE}/coins/markets?vs_currency=${currency}&ids=${id}`;
     const options = {
         method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': PUBLIC_CRYPTO_API }
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': PUBLIC_CRYPTO_API },
     };
     try {
         const res = await fetch(url, options);
@@ -46,11 +46,11 @@ export const fetchCrypto = async (id: string) => {
 
 // Crypto: Get historical data for the details page
 export const fetchCryptoHistory = async (id: string, days = 7) => {
-    let currency = "inr"
+    let currency = 'inr';
     const url = `${COIN_GECKO_BASE}/coins/${id.toLowerCase()}/market_chart?vs_currency=${currency}&days=${days}`;
     const options = {
         method: 'GET',
-        headers: { accept: 'application/json', 'x-cg-demo-api-key': PUBLIC_CRYPTO_API }
+        headers: { accept: 'application/json', 'x-cg-demo-api-key': PUBLIC_CRYPTO_API },
     };
 
     try {
@@ -61,7 +61,7 @@ export const fetchCryptoHistory = async (id: string, days = 7) => {
         const data = await res.json();
         return data;
     } catch (err) {
-        console.error("FetchCryptoMarket error:", err)
+        console.error('FetchCryptoMarket error:', err);
         throw err;
     }
 };
@@ -74,7 +74,7 @@ export const fetchWeatherForecast = async (lat: number, lon: number) => {
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         return await res.json();
     } catch (err) {
-        console.error("fetchWeatherForecast error:", err);
+        console.error('fetchWeatherForecast error:', err);
         throw err;
     }
 };

@@ -11,7 +11,7 @@ export const NotificationTester = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            const rand = Math.random()
+            const rand = Math.random();
             const fakeNotif: Notification = {
                 id: uuidv4(),
                 type: rand > 0.5 ? 'price_alert' : 'weather_alert',

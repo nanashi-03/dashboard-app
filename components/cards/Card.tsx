@@ -14,10 +14,7 @@ export const Card = ({ children, className = '' }: Props) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             whileHover={{ scale: 1.02 }}
-            className={clsx(
-                'rounded-2xl shadow-md p-4 bg-white transition-all',
-                className
-            )}
+            className={clsx('rounded-2xl bg-white p-4 shadow-md transition-all', className)}
         >
             {children}
         </motion.div>
@@ -28,8 +25,8 @@ export const MotionlessCard = ({ children, className = '' }: Props) => {
     return (
         <div
             className={clsx(
-                'rounded-2xl shadow-md p-4 bg-white dark:bg-gray-900 transition-all',
-                className
+                'rounded-2xl bg-white p-4 shadow-md transition-all dark:bg-gray-900',
+                className,
             )}
         >
             {children}
