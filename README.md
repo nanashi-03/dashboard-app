@@ -20,8 +20,7 @@ cd crypto-weather-nexus
 ### 2. Install dependencies
 
 ```bash
-npm install -D tailwindcss postcss autoprefixer
-npm install clsx uuid react-hot-toast framer-motion lucide-react @reduxjs/toolkit react-redux redux-thunk recharts redux-persist
+npm install
 ```
 
 ### 3. Create .env

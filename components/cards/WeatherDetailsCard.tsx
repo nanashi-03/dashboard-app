@@ -9,12 +9,25 @@ import { fetchWeatherForecast } from '@/utils/api';
 import { Loading } from '@/components/Loading';
 import WeatherForecastChart from '@/components/charts/WeatherForecastChart';
 
+type ForecastPoint = {
+    time: string;   // formatted date string
+    temp: string;   // temperature as a formatted string (e.g., "22.3")
+};
+
+type RawForecastItem = {
+    dt: number;
+    main: {
+        temp: number;
+    };
+    // Add more if needed
+};
+
 export function WeatherDetailsCard({ city }: { city: string }) {
     const dispatch = useDispatch<AppDispatch>();
     const weatherData = useSelector((state: RootState) => state.weather.data[city]);
     const loading = useSelector((state: RootState) => state.weather.loading);
     const error = useSelector((state: RootState) => state.weather.error);
-    const [forecast, setForecast] = useState<any[]>([]);
+    const [forecast, setForecast] = useState<ForecastPoint[]>([]);
     const [chartLoading, setChartLoading] = useState(true);
 
     useEffect(() => {
@@ -27,7 +40,7 @@ export function WeatherDetailsCard({ city }: { city: string }) {
                 setChartLoading(true);
                 try {
                     const data = await fetchWeatherForecast(weatherData.coord.lat, weatherData.coord.lon);
-                    const formatted = data.list.map((item: any) => ({
+                    const formatted = data.list.map((item: RawForecastItem) => ({
                         time: new Date(item.dt * 1000).toLocaleString('en-IN', {
                             hour: '2-digit',
                             day: 'numeric',

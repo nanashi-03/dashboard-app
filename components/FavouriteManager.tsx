@@ -7,7 +7,7 @@ import {
     removeFavoriteCrypto,
 } from '@/redux/slices/userPrefSlice';
 import { useState } from 'react';
-import { Card, MotionlessCard } from '@/components/cards/Card';
+import { MotionlessCard } from '@/components/cards/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import toast from 'react-hot-toast';

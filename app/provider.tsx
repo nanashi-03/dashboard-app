@@ -5,9 +5,12 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from "react";
 
+import type { Persistor } from 'redux-persist';
+import type { Store } from '@reduxjs/toolkit';
+
 export const AppProviders = ({ children }: { children: React.ReactNode }) => {
-    const [store, setStore] = useState<any>(null);
-    const [persistor, setPersistor] = useState<any>(null);
+    const [store, setStore] = useState<Store | null>(null);
+    const [persistor, setPersistor] = useState<Persistor | null>(null);
 
     useEffect(() => {
     const loadStore = async () => {

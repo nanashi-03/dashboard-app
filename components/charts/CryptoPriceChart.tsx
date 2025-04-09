@@ -7,7 +7,6 @@ import {
     YAxis,
     Tooltip,
     ResponsiveContainer,
-    CartesianGrid
 } from 'recharts';
 
 interface Props {

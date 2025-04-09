@@ -11,7 +11,12 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 
-export default function WeatherForecastChart({ data }: { data: any[] }) {
+type ForecastPoint = {
+    time: string;   // formatted date string
+    temp: string;   // temperature as a formatted string (e.g., "22.3")
+};
+
+export default function WeatherForecastChart({ data }: { data: ForecastPoint[] }) {
     return (
         <div>
             <h2 className="text-xl font-semibold mb-2">5-Day Forecast</h2>

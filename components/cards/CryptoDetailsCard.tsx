@@ -56,7 +56,7 @@ export function CryptoDetailsCard({ id }: { id: string }) {
     if (!cryptoData) return <p>No crypto data found.</p>;
 
     const crypto = cryptoData[0];
-    if (!crypto) return <p>No crypto detail data available for "{id}".</p>;
+    if (!crypto) return <p>No crypto detail data available for &quot;{id}&quot;.</p>;
 
     const {
         name,
@@ -118,7 +118,7 @@ export function CryptoDetailsCard({ id }: { id: string }) {
                 ) : chartData.length > 0 ? (
                     <CryptoPriceChart data={chartData} />
                 ) : (
-                    <p className="text-red-500">No chart data available for "{id}"</p>
+                    <p className="text-red-500">No chart data available for &quot;{id}&quot;</p>
                 )}
             </div>
         </div>

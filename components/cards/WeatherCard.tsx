@@ -28,7 +28,7 @@ export const WeatherCard = ({ city }: { city: string }) => {
     return (
         <Link href={`/weather/${city}`}>
             <Card className='dark:bg-gray-900'>
-                <h2 className="text-xl font-semibold">{city}</h2>
+                <h2 className="text-xl font-semibold capitalize">{city}</h2>
                 <p>🌡 Temp: {temp}°C</p>
                 <p>💧 Humidity: {humidity}%</p>
                 <p>🌤 Condition: {condition}</p>
